@@ -1,12 +1,10 @@
 
-import type { FormData, Report } from '../types';
-
 const DRAFT_KEY = 'frsc-form-draft';
 const REPORTS_KEY = 'frsc-submitted-reports';
 
 // --- Draft Management ---
 
-export const saveDraft = (formData: FormData): void => {
+export const saveDraft = (formData) => {
   try {
     const serializedData = JSON.stringify(formData);
     localStorage.setItem(DRAFT_KEY, serializedData);
@@ -16,7 +14,7 @@ export const saveDraft = (formData: FormData): void => {
   }
 };
 
-export const loadDraft = (): FormData | null => {
+export const loadDraft = () => {
   try {
     const serializedData = localStorage.getItem(DRAFT_KEY);
     if (serializedData === null) {
@@ -29,15 +27,15 @@ export const loadDraft = (): FormData | null => {
   }
 };
 
-export const clearDraft = (): void => {
+export const clearDraft = () => {
   localStorage.removeItem(DRAFT_KEY);
 };
 
 
 // --- "Online" Report Storage Simulation ---
 
-export const saveReportOnline = (report: Report): Promise<void> => {
-  return new Promise((resolve, reject) => {
+export const saveReportOnline = (report) => {
+  return new Promise<void>((resolve, reject) => {
     setTimeout(() => {
       try {
         const existingReports = loadReportsOnline();
@@ -52,7 +50,7 @@ export const saveReportOnline = (report: Report): Promise<void> => {
   });
 };
 
-export const loadReportsOnline = (): Report[] => {
+export const loadReportsOnline = () => {
   try {
     const serializedData = localStorage.getItem(REPORTS_KEY);
     if (serializedData === null) {

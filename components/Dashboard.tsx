@@ -1,14 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import { FormSection } from './FormSection';
-import { ExportSection } from './ExportSection';
-import { TeamLeaderSelection } from './AttendantSelection';
-import { ReportsList } from './ReportsList';
-import type { FormData, Report, TeamLeader, Offence, OffenderInfo } from '../types';
-import { frscLogoBase64 } from '../assets/logo';
-import { saveDraft, loadDraft, clearDraft, saveReportOnline, loadReportsOnline } from '../services/storageService';
+import { FormSection } from './FormSection.js';
+import { ExportSection } from './ExportSection.js';
+import { TeamLeaderSelection } from './AttendantSelection.js';
+import { ReportsList } from './ReportsList.js';
+import { frscLogoBase64 } from '../assets/logo.js';
+import { saveDraft, loadDraft, clearDraft, saveReportOnline, loadReportsOnline } from '../services/storageService.js';
 
-const createInitialOffender = (): OffenderInfo => ({
+const createInitialOffender = () => ({
   fullName: '',
   ticket: '',
   vehicleNumberPlate: '',
@@ -21,13 +20,13 @@ const createInitialOffender = (): OffenderInfo => ({
   currencyDetails: [],
 });
 
-const createInitialFormData = (): FormData => {
+const createInitialFormData = () => {
   return {
     offenders: [createInitialOffender()],
   };
 };
 
-const initialTeamLeaders: TeamLeader[] = [
+const initialTeamLeaders = [
   { name: 'RC OS ODEKUNLE', pin: 'C-07287' },
   { name: 'RC CT BOYEDE', pin: 'C-07716' },
   { name: 'DRC TO OKUNOYE', pin: 'C-08653' },
@@ -44,8 +43,8 @@ const initialTeamLeaders: TeamLeader[] = [
   { name: 'ARC BJ OWOEYE', pin: 'C-012236' },
 ];
 
-const initialRoutes: string[] = ['OS - SEKONA', 'OS - IKIRUN', 'OS - IWO/EJIGBO', 'OS - ILESA'];
-const initialOffences: Offence[] = [
+const initialRoutes = ['OS - SEKONA', 'OS - IKIRUN', 'OS - IWO/EJIGBO', 'OS - ILESA'];
+const initialOffences = [
   { code: 'SUV', name: 'SEAT BELT VIOLATION' },
   { code: 'RMH', name: 'RIDING MOTORCYCLE WITHOUT USING CRASH HELMET' },
   { code: 'TYV', name: 'DRIVING WITH WORN-OUT TYRE' },
@@ -83,26 +82,22 @@ const initialOffences: Offence[] = [
   { code: 'UDR', name: 'UNDER AGE DRIVING/RIDING' },
   { code: 'WOV', name: 'WRONGFUL OVERTAKING' },  
 ];
-const initialCurrencies: string[] = ['NGN', 'USD', 'EUR', 'GBP'];
+const initialCurrencies = ['NGN', 'USD', 'EUR', 'GBP'];
 
 const getTodayDateString = () => new Date().toISOString().slice(0, 10);
 
-interface DashboardProps {
-  onSignOut: () => void;
-}
-
-export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
-  const [formData, setFormData] = useState<FormData>(createInitialFormData());
-  const [reports, setReports] = useState<Report[]>([]);
-  const [selectedTeamLeader, setSelectedTeamLeader] = useState<string>('');
-  const [teamLeaders, setTeamLeaders] = useState<TeamLeader[]>(initialTeamLeaders);
-  const [syncStatus, setSyncStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
-  const [dateOfEntry, setDateOfEntry] = useState<string>(getTodayDateString());
-  const [routes, setRoutes] = useState<string[]>(initialRoutes);
-  const [selectedRoute, setSelectedRoute] = useState<string>('');
-  const [offences, setOffences] = useState<Offence[]>(initialOffences);
-  const [currencies, setCurrencies] = useState<string[]>(initialCurrencies);
-  const [validationErrors, setValidationErrors] = useState<{ [key: string]: string }>({});
+export const Dashboard = ({ onSignOut }) => {
+  const [formData, setFormData] = useState(createInitialFormData());
+  const [reports, setReports] = useState([]);
+  const [selectedTeamLeader, setSelectedTeamLeader] = useState('');
+  const [teamLeaders, setTeamLeaders] = useState(initialTeamLeaders);
+  const [syncStatus, setSyncStatus] = useState('idle');
+  const [dateOfEntry, setDateOfEntry] = useState(getTodayDateString());
+  const [routes, setRoutes] = useState(initialRoutes);
+  const [selectedRoute, setSelectedRoute] = useState('');
+  const [offences, setOffences] = useState(initialOffences);
+  const [currencies, setCurrencies] = useState(initialCurrencies);
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
 
   useEffect(() => {
@@ -124,7 +119,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     }
   };
 
-  const handleOffenderInfoChange = (index: number, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleOffenderInfoChange = (index, e) => {
     resetSyncStatus();
     const { name, value } = e.target;
     
@@ -141,7 +136,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     });
   };
 
-  const handleOffenceChange = (index: number, offenceName: string, isChecked: boolean) => {
+  const handleOffenceChange = (index, offenceName, isChecked) => {
     resetSyncStatus();
     setValidationErrors(prev => {
       const newErrors = { ...prev };
@@ -176,7 +171,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     });
   };
 
-  const handleCurrencyDetailChange = (offenderIndex: number, currencyIndex: number, e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleCurrencyDetailChange = (offenderIndex, currencyIndex, e) => {
     resetSyncStatus();
     const { name, value } = e.target;
     
@@ -195,7 +190,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     });
   };
   
-  const handleAddCurrencyDetail = (offenderIndex: number) => {
+  const handleAddCurrencyDetail = (offenderIndex) => {
     resetSyncStatus();
     setFormData(prev => {
         const newOffenders = [...prev.offenders];
@@ -205,7 +200,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     });
   };
 
-  const handleRemoveCurrencyDetail = (offenderIndex: number, currencyId: number) => {
+  const handleRemoveCurrencyDetail = (offenderIndex, currencyId) => {
     resetSyncStatus();
     setFormData(prev => {
         const newOffenders = [...prev.offenders];
@@ -215,7 +210,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     });
   };
   
-  const handleAddNewCurrency = (currency: string) => {
+  const handleAddNewCurrency = (currency) => {
     if (currency && !currencies.includes(currency)) {
         setCurrencies(prev => [...prev, currency.toUpperCase()]);
     } else if (currencies.includes(currency)) {
@@ -226,17 +221,17 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
   };
 
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDateChange = (e) => {
     setValidationErrors(prev => ({...prev, dateOfEntry: ''}));
     setDateOfEntry(e.target.value);
   };
 
-  const handleTeamLeaderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleTeamLeaderChange = (e) => {
     setValidationErrors(prev => ({...prev, selectedTeamLeader: ''}));
     setSelectedTeamLeader(e.target.value);
   };
 
-  const handleRouteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleRouteChange = (e) => {
     setValidationErrors(prev => ({...prev, selectedRoute: ''}));
     setSelectedRoute(e.target.value);
   };
@@ -249,7 +244,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     resetSyncStatus();
   };
 
-  const handleRemoveOffender = (index: number) => {
+  const handleRemoveOffender = (index) => {
     if (formData.offenders.length <= 1) return;
     setFormData(prev => ({
         ...prev,
@@ -258,7 +253,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     resetSyncStatus();
   };
 
-  const handleAddNewRoute = (route: string) => {
+  const handleAddNewRoute = (route) => {
     if (route && !routes.includes(route)) {
       const newRoutes = [...routes, route];
       setRoutes(newRoutes);
@@ -271,7 +266,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     }
   };
 
-  const handleAddNewTeamLeader = (name: string, pin: string) => {
+  const handleAddNewTeamLeader = (name, pin) => {
     if (name && pin && !teamLeaders.some(leader => leader.name === name)) {
       const newTeamLeaders = [...teamLeaders, { name, pin }];
       setTeamLeaders(newTeamLeaders);
@@ -284,11 +279,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     }
   };
   
-  const handleAddNewOffence = (offence: Offence) => {
+  const handleAddNewOffence = (offence) => {
     if (offence.name && offence.code && !offences.some(o => o.name === offence.name || o.code === offence.code)) {
       const newOffences = [...offences, offence];
       setOffences(newOffences);
-      // Auto-select for the last offender form
       handleOffenceChange(formData.offenders.length - 1, offence.name, true);
     } else if (offences.some(o => o.name === offence.name)) {
       alert('An offence with this name already exists.');
@@ -313,7 +307,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
   };
 
   const handleSubmitForm = async () => {
-    const newErrors: { [key: string]: string } = {};
+    const newErrors = {};
     let isFormValid = true;
 
     if (!dateOfEntry) {
@@ -330,8 +324,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     }
 
     formData.offenders.forEach((offender, index) => {
-        // Validate standard fields
-        (Object.keys(offender) as Array<keyof OffenderInfo>).forEach(key => {
+        (Object.keys(offender)).forEach(key => {
             const fieldKey = `offender-${index}-${key}`;
             if (key === 'offence') {
                 if (offender.offence.length === 0) {
@@ -358,7 +351,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
                         }
                     });
                 }
-            } else if (typeof offender[key] === 'string' && !(offender[key] as string).trim()) {
+            } else if (typeof offender[key] === 'string' && !(offender[key]).trim()) {
                 newErrors[fieldKey] = 'This field is required';
                 isFormValid = false;
             }
@@ -373,7 +366,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
     
     const selectedLeader = teamLeaders.find(leader => leader.name === selectedTeamLeader);
 
-    const newReport: Report = {
+    const newReport = {
       id: Date.now(),
       submissionTimestamp: Date.now(),
       teamLeader: selectedTeamLeader,
@@ -399,64 +392,62 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSignOut }) => {
   const selectedTeamLeaderPin = selectedLeaderObject ? selectedLeaderObject.pin : '';
 
   return (
-    <div className="container mx-auto p-4 sm:p-6 lg:p-8">
-      <header className="text-center mb-10 flex flex-col items-center relative">
-        <img src={frscLogoBase64} alt="FRSC Logo" className="h-24 w-auto mb-4" />
-        <h1 className="text-4xl sm:text-5xl font-bold text-slate-800 tracking-tight">FRSC OPERATIONS E-DASHBOARD</h1>
-        <p className="mt-2 text-lg text-slate-600">Fill in the details below and export your data effortlessly.</p>
-        <button
-          onClick={onSignOut}
-          className="absolute top-0 right-0 px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400"
-          aria-label="Sign out of the application"
-        >
-          Sign Out
-        </button>
-      </header>
-      <main>
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-          <div className="lg:col-span-3">
-            <TeamLeaderSelection 
-              teamLeaders={teamLeaders}
-              selectedTeamLeader={selectedTeamLeader}
-              selectedTeamLeaderPin={selectedTeamLeaderPin}
-              onTeamLeaderChange={handleTeamLeaderChange}
-              onAddNewTeamLeader={handleAddNewTeamLeader}
-              dateOfEntry={dateOfEntry}
-              onDateChange={handleDateChange}
-              routes={routes}
-              selectedRoute={selectedRoute}
-              onRouteChange={handleRouteChange}
-              onAddNewRoute={handleAddNewRoute}
-              validationErrors={validationErrors}
-            />
-            <FormSection
-              formData={formData}
-              onOffenderInfoChange={handleOffenderInfoChange}
-              onOffenceChange={handleOffenceChange}
-              onAddOffender={handleAddOffender}
-              onRemoveOffender={handleRemoveOffender}
-              onSubmit={handleSubmitForm}
-              onSaveDraft={handleSaveDraft}
-              syncStatus={syncStatus}
-              offences={offences}
-              currencies={currencies}
-              onAddNewOffence={handleAddNewOffence}
-              onAddNewCurrency={handleAddNewCurrency}
-              onCurrencyDetailChange={handleCurrencyDetailChange}
-              onAddCurrencyDetail={handleAddCurrencyDetail}
-              onRemoveCurrencyDetail={handleRemoveCurrencyDetail}
-              validationErrors={validationErrors}
-            />
-          </div>
-          <div className="lg:col-span-2">
-            <ExportSection reports={reports} offences={offences} />
-          </div>
-        </div>
-        <ReportsList reports={reports} offences={offences} />
-      </main>
-      <footer className="text-center mt-12 text-slate-500">
-        <p>&copy; {new Date().getFullYear()} FRSC OPERATIONS E-DASHBOARD. All rights reserved.</p>
-      </footer>
-    </div>
+    React.createElement('div', { className: 'container mx-auto p-4 sm:p-6 lg:p-8' },
+      React.createElement('header', { className: 'text-center mb-10 flex flex-col items-center relative' },
+        React.createElement('img', { src: frscLogoBase64, alt: 'FRSC Logo', className: 'h-24 w-auto mb-4' }),
+        React.createElement('h1', { className: 'text-4xl sm:text-5xl font-bold text-slate-800 tracking-tight' }, 'FRSC OPERATIONS E-DASHBOARD'),
+        React.createElement('p', { className: 'mt-2 text-lg text-slate-600' }, 'Fill in the details below and export your data effortlessly.'),
+        React.createElement('button', {
+          onClick: onSignOut,
+          className: 'absolute top-0 right-0 px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400',
+          'aria-label': 'Sign out of the application'
+        }, 'Sign Out')
+      ),
+      React.createElement('main', null,
+        React.createElement('div', { className: 'grid grid-cols-1 lg:grid-cols-5 gap-8' },
+          React.createElement('div', { className: 'lg:col-span-3' },
+            React.createElement(TeamLeaderSelection, {
+              teamLeaders: teamLeaders,
+              selectedTeamLeader: selectedTeamLeader,
+              selectedTeamLeaderPin: selectedTeamLeaderPin,
+              onTeamLeaderChange: handleTeamLeaderChange,
+              onAddNewTeamLeader: handleAddNewTeamLeader,
+              dateOfEntry: dateOfEntry,
+              onDateChange: handleDateChange,
+              routes: routes,
+              selectedRoute: selectedRoute,
+              onRouteChange: handleRouteChange,
+              onAddNewRoute: handleAddNewRoute,
+              validationErrors: validationErrors,
+            }),
+            React.createElement(FormSection, {
+              formData: formData,
+              onOffenderInfoChange: handleOffenderInfoChange,
+              onOffenceChange: handleOffenceChange,
+              onAddOffender: handleAddOffender,
+              onRemoveOffender: handleRemoveOffender,
+              onSubmit: handleSubmitForm,
+              onSaveDraft: handleSaveDraft,
+              syncStatus: syncStatus,
+              offences: offences,
+              currencies: currencies,
+              onAddNewOffence: handleAddNewOffence,
+              onAddNewCurrency: handleAddNewCurrency,
+              onCurrencyDetailChange: handleCurrencyDetailChange,
+              onAddCurrencyDetail: handleAddCurrencyDetail,
+              onRemoveCurrencyDetail: handleRemoveCurrencyDetail,
+              validationErrors: validationErrors,
+            })
+          ),
+          React.createElement('div', { className: 'lg:col-span-2' },
+            React.createElement(ExportSection, { reports: reports, offences: offences })
+          )
+        ),
+        React.createElement(ReportsList, { reports: reports, offences: offences })
+      ),
+      React.createElement('footer', { className: 'text-center mt-12 text-slate-500' },
+        React.createElement('p', null, `© ${new Date().getFullYear()} FRSC OPERATIONS E-DASHBOARD. All rights reserved.`)
+      )
+    )
   );
 };

@@ -1,15 +1,13 @@
 
-import type { Report, ExportColumns, ReportField, CurrencyDetail, Offence } from '../types';
-
-const actionTakenMap: { [key: string]: string } = {
+const actionTakenMap = {
   impoundment: 'Impoundment',
   confiscation: 'Confiscation NDL',
   confiscation1: 'Confiscation VEH PAPER',
 };
 
-const getActionTakenDisplay = (value: string) => actionTakenMap[value] || value;
+const getActionTakenDisplay = (value) => actionTakenMap[value] || value;
 
-const generateDocHtml = (reports: Report[], selectedColumns: ExportColumns, offences: Offence[]): string => {
+const generateDocHtml = (reports, selectedColumns, offences) => {
   const offenceNameToCodeMap = new Map(offences.map(o => [o.name, o.code]));
   
   const reportsHtml = reports.map(report => {
@@ -122,7 +120,7 @@ const generateDocHtml = (reports: Report[], selectedColumns: ExportColumns, offe
 };
 
 
-const triggerDownload = (blob: Blob, filename: string) => {
+const triggerDownload = (blob, filename) => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
@@ -133,7 +131,7 @@ const triggerDownload = (blob: Blob, filename: string) => {
   URL.revokeObjectURL(url);
 };
 
-export const exportToDoc = (reports: Report[], selectedColumns: ExportColumns, offences: Offence[]) => {
+export const exportToDoc = (reports, selectedColumns, offences) => {
   if (reports.length === 0) return;
   const htmlContent = generateDocHtml(reports, selectedColumns, offences);
   const blob = new Blob(['\ufeff', htmlContent], {
@@ -143,26 +141,26 @@ export const exportToDoc = (reports: Report[], selectedColumns: ExportColumns, o
   triggerDownload(blob, filename);
 };
 
-const convertToCSV = (reports: Report[], selectedColumns: ExportColumns, offences: Offence[]): string => {
+const convertToCSV = (reports, selectedColumns, offences) => {
     const offenceNameToCodeMap = new Map(offences.map(o => [o.name, o.code]));
-    const orderedReportFields: ReportField[] = [
+    const orderedReportFields = [
       'dateOfEntry', 'route', 'teamLeader', 'teamLeaderPin', 'fullName', 'ticket', 'offence', 'actionTaken', 
       'currencyType', 'amountOffered', 'currencyNumber', 'vehicleNumberPlate', 'vehicleColor', 
       'vehicleMake', 'vehicleType', 'vehicleCategory'
     ];
 
-    const fieldsToExport: ReportField[] = orderedReportFields.filter(field => selectedColumns[field]);
+    const fieldsToExport = orderedReportFields.filter(field => selectedColumns[field]);
     
-    const csvRows: string[] = [];
+    const csvRows = [];
 
     reports.forEach(report => {
         report.formData.offenders.forEach(offenderInfo => {
             const hasAcs = offenderInfo.offence.includes('ATTEMPTING TO CORRUPT MARSHAL');
-            const currencyDetails = hasAcs && offenderInfo.currencyDetails.length > 0 ? offenderInfo.currencyDetails : [{} as CurrencyDetail];
+            const currencyDetails = hasAcs && offenderInfo.currencyDetails.length > 0 ? offenderInfo.currencyDetails : [{}];
 
             currencyDetails.forEach(currency => {
                 const rowData = fieldsToExport.map(field => {
-                    let value: string | undefined = '';
+                    let value = '';
                     switch(field) {
                         case 'dateOfEntry': value = report.dateOfEntry; break;
                         case 'route': value = report.route; break;
@@ -192,7 +190,7 @@ const convertToCSV = (reports: Report[], selectedColumns: ExportColumns, offence
     return csvRows.join('\n');
 };
 
-export const exportToXls = (reports: Report[], selectedColumns: ExportColumns, offences: Offence[]) => {
+export const exportToXls = (reports, selectedColumns, offences) => {
   if (reports.length === 0) return;
   const csvContent = convertToCSV(reports, selectedColumns, offences);
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
