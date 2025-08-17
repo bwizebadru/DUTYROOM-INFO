@@ -35,7 +35,7 @@ export const clearDraft = () => {
 // --- "Online" Report Storage Simulation ---
 
 export const saveReportOnline = (report) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     setTimeout(() => {
       try {
         const existingReports = loadReportsOnline();

@@ -19,18 +19,18 @@ const InputField = ({ label, name, value, onChange, type = 'text', placeholder, 
   )
 );
 
-const SelectField = ({ label, id, name, value, onChange, error, children, disabled = false }) => (
+const SelectField = (props) => (
     React.createElement('div', null,
-      React.createElement('label', { htmlFor: id, className: 'block text-sm font-medium text-slate-700' }, label),
+      React.createElement('label', { htmlFor: props.id, className: 'block text-sm font-medium text-slate-700' }, props.label),
       React.createElement('select', {
-        id: id,
-        name: name,
-        value: value,
-        onChange: onChange,
-        disabled: disabled,
-        className: `mt-1 block w-full pl-3 pr-10 py-2 text-base border focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md ${error ? 'border-red-500' : 'border-slate-300'}`
-      }, children),
-      error && React.createElement('p', { className: 'mt-1 text-xs text-red-600' }, error)
+        id: props.id,
+        name: props.name,
+        value: props.value,
+        onChange: props.onChange,
+        disabled: props.disabled || false,
+        className: `mt-1 block w-full pl-3 pr-10 py-2 text-base border focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md ${props.error ? 'border-red-500' : 'border-slate-300'}`
+      }, props.children),
+      props.error && React.createElement('p', { className: 'mt-1 text-xs text-red-600' }, props.error)
     )
   );
 
