@@ -97,7 +97,7 @@ export const Dashboard = ({ onSignOut }) => {
   const [selectedRoute, setSelectedRoute] = useState('');
   const [offences, setOffences] = useState(initialOffences);
   const [currencies, setCurrencies] = useState(initialCurrencies);
-  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+  const [validationErrors, setValidationErrors] = useState({});
 
 
   useEffect(() => {

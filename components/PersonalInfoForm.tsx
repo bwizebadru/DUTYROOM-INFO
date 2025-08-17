@@ -19,7 +19,7 @@ const InputField = ({ label, name, value, onChange, type = 'text', placeholder, 
   )
 );
 
-const SelectField = ({ label, id, name, value, onChange, error, children, disabled }) => (
+const SelectField = ({ label, id, name, value, onChange, error, children, disabled = false }) => (
     React.createElement('div', null,
       React.createElement('label', { htmlFor: id, className: 'block text-sm font-medium text-slate-700' }, label),
       React.createElement('select', {
