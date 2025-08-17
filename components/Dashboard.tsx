@@ -308,7 +308,7 @@ export const Dashboard = ({ onSignOut }) => {
   };
 
   const handleSubmitForm = async () => {
-    const newErrors = {};
+    const newErrors: { [key: string]: string } = {};
     let isFormValid = true;
 
     if (!dateOfEntry) {
