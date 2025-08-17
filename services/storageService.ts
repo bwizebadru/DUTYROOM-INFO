@@ -1,4 +1,5 @@
 
+
 const DRAFT_KEY = 'frsc-form-draft';
 const REPORTS_KEY = 'frsc-submitted-reports';
 
@@ -34,8 +35,8 @@ export const clearDraft = () => {
 
 // --- "Online" Report Storage Simulation ---
 
-export const saveReportOnline = (report) => {
-  return new Promise<void>((resolve, reject) => {
+export const saveReportOnline = (report): Promise<void> => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
         const existingReports = loadReportsOnline();

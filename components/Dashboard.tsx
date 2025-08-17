@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { FormSection } from './FormSection.js';
 import { ExportSection } from './ExportSection.js';
@@ -97,7 +98,7 @@ export const Dashboard = ({ onSignOut }) => {
   const [selectedRoute, setSelectedRoute] = useState('');
   const [offences, setOffences] = useState(initialOffences);
   const [currencies, setCurrencies] = useState(initialCurrencies);
-  const [validationErrors, setValidationErrors] = useState<{ [key: string]: string }>({});
+  const [validationErrors, setValidationErrors] = useState({});
 
 
   useEffect(() => {
@@ -307,7 +308,7 @@ export const Dashboard = ({ onSignOut }) => {
   };
 
   const handleSubmitForm = async () => {
-    const newErrors = {};
+    const newErrors: { [key: string]: string } = {};
     let isFormValid = true;
 
     if (!dateOfEntry) {
