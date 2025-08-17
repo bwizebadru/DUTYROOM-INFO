@@ -1,0 +1,5 @@
+{
+  "name": "FRSC OPERATIONS E-DASHBOARD",
+  "description": "An e-dashboard for FRSC operations that allows users to fill out a comprehensive form and export the gathered information into either a DOC or XLS file format with a single click.",
+  "requestFramePermissions": []
+}
