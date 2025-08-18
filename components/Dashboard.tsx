@@ -5,7 +5,6 @@ import { FormSection } from './FormSection.js';
 import { ExportSection } from './ExportSection.js';
 import { TeamLeaderSelection } from './AttendantSelection.js';
 import { ReportsList } from './ReportsList.js';
-import { frscLogoBase64 } from '../assets/logo.js';
 import { saveDraft, loadDraft, clearDraft, saveReportOnline, loadReportsOnline } from '../services/storageService.js';
 
 const createInitialOffender = () => ({
@@ -395,7 +394,6 @@ export const Dashboard = ({ onSignOut }) => {
   return (
     React.createElement('div', { className: 'container mx-auto p-4 sm:p-6 lg:p-8' },
       React.createElement('header', { className: 'text-center mb-10 flex flex-col items-center relative' },
-        React.createElement('img', { src: frscLogoBase64, alt: 'FRSC Logo', className: 'h-24 w-auto mb-4' }),
         React.createElement('h1', { className: 'text-4xl sm:text-5xl font-bold text-slate-800 tracking-tight' }, 'FRSC OPERATIONS E-DASHBOARD'),
         React.createElement('p', { className: 'mt-2 text-lg text-slate-600' }, 'Fill in the details below and export your data effortlessly.'),
         React.createElement('button', {

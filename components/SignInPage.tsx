@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { frscLogoBase64 } from '../assets/logo.js';
 
 export const SignInPage = ({ onSignIn }) => {
   const [username, setUsername] = useState('');
@@ -20,7 +19,6 @@ export const SignInPage = ({ onSignIn }) => {
     React.createElement('div', { className: 'flex items-center justify-center min-h-screen' },
       React.createElement('div', { className: 'w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-lg z-10' },
         React.createElement('div', { className: 'text-center' },
-          React.createElement('img', { src: frscLogoBase64, alt: 'FRSC Logo', className: 'w-24 h-24 mx-auto mb-4' }),
           React.createElement('h1', { className: 'text-3xl font-bold text-slate-800' }, 'Sign In'),
           React.createElement('p', { className: 'mt-2 text-slate-600' }, 'FRSC Operations E-Dashboard')
         ),
