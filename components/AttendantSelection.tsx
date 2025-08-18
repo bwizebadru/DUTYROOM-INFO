@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 
 export const TeamLeaderSelection = ({
@@ -48,7 +49,7 @@ export const TeamLeaderSelection = ({
 
   return (
     React.createElement('div', { className: 'p-6 bg-white rounded-lg shadow-md mb-8' },
-      React.createElement('h2', { className: 'text-xl font-semibold text-slate-800 border-b pb-3 mb-6' }, 'Operational Information'),
+      React.createElement('h2', { className: 'text-xl font-semibold text-blue-900 border-b pb-3 mb-6' }, 'Operational Information'),
       React.createElement('div', { className: 'space-y-6' },
         React.createElement('div', null,
           React.createElement('label', { htmlFor: 'dateOfEntry', className: 'block text-sm font-medium text-slate-700' }, 'Date of Entry'),
@@ -58,7 +59,7 @@ export const TeamLeaderSelection = ({
             name: 'dateOfEntry',
             value: dateOfEntry,
             onChange: onDateChange,
-            className: `mt-1 block w-full pl-3 pr-2 py-2 text-base border focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md ${validationErrors.dateOfEntry ? 'border-red-500' : 'border-slate-300'}`
+            className: `mt-1 block w-full pl-3 pr-2 py-2 text-base border focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md ${validationErrors.dateOfEntry ? 'border-red-500' : 'border-slate-300'}`
           }),
           validationErrors.dateOfEntry && React.createElement('p', { className: 'mt-1 text-xs text-red-600' }, validationErrors.dateOfEntry)
         ),
@@ -69,7 +70,7 @@ export const TeamLeaderSelection = ({
             name: 'teamLeader',
             value: selectedTeamLeader,
             onChange: onTeamLeaderChange,
-            className: `mt-1 block w-full pl-3 pr-10 py-2 text-base border focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md ${validationErrors.selectedTeamLeader ? 'border-red-500' : 'border-slate-300'}`
+            className: `mt-1 block w-full pl-3 pr-10 py-2 text-base border focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md ${validationErrors.selectedTeamLeader ? 'border-red-500' : 'border-slate-300'}`
           },
             React.createElement('option', { value: '', disabled: true }, '-- Select a team leader --'),
             teamLeaders.map(leader =>
@@ -93,7 +94,7 @@ export const TeamLeaderSelection = ({
                 onChange: (e) => setNewLeaderName(e.target.value),
                 onKeyDown: handleLeaderKeyDown,
                 placeholder: 'Name',
-                className: 'sm:col-span-2 block w-full rounded-md border-slate-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                className: 'sm:col-span-2 block w-full rounded-md border-slate-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
               }),
               React.createElement('input', {
                 type: 'text',
@@ -102,12 +103,12 @@ export const TeamLeaderSelection = ({
                 onChange: (e) => setNewLeaderPin(e.target.value),
                 onKeyDown: handleLeaderKeyDown,
                 placeholder: 'PIN',
-                className: 'sm:col-span-2 block w-full rounded-md border-slate-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                className: 'sm:col-span-2 block w-full rounded-md border-slate-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
               }),
               React.createElement('button', {
                 onClick: handleAddLeaderClick,
                 type: 'button',
-                className: 'sm:col-span-1 inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                className: 'sm:col-span-1 inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600'
               }, 'Add')
             )
           )
@@ -119,7 +120,7 @@ export const TeamLeaderSelection = ({
             name: 'route',
             value: selectedRoute,
             onChange: onRouteChange,
-            className: `mt-1 block w-full pl-3 pr-10 py-2 text-base border focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md ${validationErrors.selectedRoute ? 'border-red-500' : 'border-slate-300'}`
+            className: `mt-1 block w-full pl-3 pr-10 py-2 text-base border focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md ${validationErrors.selectedRoute ? 'border-red-500' : 'border-slate-300'}`
           },
             React.createElement('option', { value: '', disabled: true }, '-- Select a route --'),
             routes.map(route =>
@@ -137,12 +138,12 @@ export const TeamLeaderSelection = ({
                 onChange: (e) => setNewRoute(e.target.value),
                 onKeyDown: handleRouteKeyDown,
                 placeholder: 'e.g., Abuja - Kaduna',
-                className: 'sm:col-span-4 block w-full rounded-md border-slate-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                className: 'sm:col-span-4 block w-full rounded-md border-slate-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
               }),
               React.createElement('button', {
                 onClick: handleAddRouteClick,
                 type: 'button',
-                className: 'sm:col-span-1 inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                className: 'sm:col-span-1 inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600'
               }, 'Add')
             )
           )

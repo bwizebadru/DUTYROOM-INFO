@@ -1,20 +1,15 @@
 {
   "name": "frsc-operations-e-dashboard",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "An e-dashboard for FRSC operations that allows users to fill out a comprehensive form and export the gathered information into either a DOC or XLS file format with a single click.",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "build:css": "tailwindcss -i input.css -o styles.css",
+    "watch:css": "tailwindcss -i input.css -o styles.css --watch"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }

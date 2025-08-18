@@ -97,7 +97,7 @@ export const Dashboard = ({ onSignOut }) => {
   const [selectedRoute, setSelectedRoute] = useState('');
   const [offences, setOffences] = useState(initialOffences);
   const [currencies, setCurrencies] = useState(initialCurrencies);
-  const [validationErrors, setValidationErrors] = useState<{ [key: string]: string }>({});
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
 
   useEffect(() => {
@@ -222,17 +222,29 @@ export const Dashboard = ({ onSignOut }) => {
 
 
   const handleDateChange = (e) => {
-    setValidationErrors(prev => ({...prev, dateOfEntry: ''}));
+    setValidationErrors(prev => {
+      const newErrors = { ...prev };
+      delete newErrors.dateOfEntry;
+      return newErrors;
+    });
     setDateOfEntry(e.target.value);
   };
 
   const handleTeamLeaderChange = (e) => {
-    setValidationErrors(prev => ({...prev, selectedTeamLeader: ''}));
+    setValidationErrors(prev => {
+      const newErrors = { ...prev };
+      delete newErrors.selectedTeamLeader;
+      return newErrors;
+    });
     setSelectedTeamLeader(e.target.value);
   };
 
   const handleRouteChange = (e) => {
-    setValidationErrors(prev => ({...prev, selectedRoute: ''}));
+    setValidationErrors(prev => {
+      const newErrors = { ...prev };
+      delete newErrors.selectedRoute;
+      return newErrors;
+    });
     setSelectedRoute(e.target.value);
   };
   
@@ -258,7 +270,11 @@ export const Dashboard = ({ onSignOut }) => {
       const newRoutes = [...routes, route];
       setRoutes(newRoutes);
       setSelectedRoute(route);
-      setValidationErrors(prev => ({...prev, selectedRoute: ''}));
+      setValidationErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors.selectedRoute;
+        return newErrors;
+      });
     } else if (routes.includes(route)) {
       alert('This route already exists.');
     } else {
@@ -271,7 +287,11 @@ export const Dashboard = ({ onSignOut }) => {
       const newTeamLeaders = [...teamLeaders, { name, pin }];
       setTeamLeaders(newTeamLeaders);
       setSelectedTeamLeader(name);
-      setValidationErrors(prev => ({...prev, selectedTeamLeader: ''}));
+      setValidationErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors.selectedTeamLeader;
+        return newErrors;
+      });
     } else if (teamLeaders.some(leader => leader.name === name)) {
       alert('A team leader with this name already exists.');
     } else {
@@ -307,7 +327,7 @@ export const Dashboard = ({ onSignOut }) => {
   };
 
   const handleSubmitForm = async () => {
-    const newErrors: { [key: string]: string } = {};
+    const newErrors: Record<string, string> = {};
     let isFormValid = true;
 
     if (!dateOfEntry) {
@@ -394,8 +414,8 @@ export const Dashboard = ({ onSignOut }) => {
   return (
     React.createElement('div', { className: 'container mx-auto p-4 sm:p-6 lg:p-8' },
       React.createElement('header', { className: 'text-center flex flex-col items-center relative dashboard-header' },
-        React.createElement('h1', { className: 'text-4xl sm:text-5xl font-bold text-slate-800 tracking-tight' }, 'FRSC OPERATIONS E-DASHBOARD'),
-        React.createElement('p', { className: 'mt-2 text-lg text-slate-600' }, 'Fill in the details below and export your data effortlessly.'),
+        React.createElement('h1', { className: 'text-4xl sm:text-5xl font-bold text-blue-900 tracking-tight' }, 'FRSC OPERATIONS E-DASHBOARD'),
+        React.createElement('p', { className: 'mt-2 text-lg text-blue-600' }, 'Fill in the details below and export your data effortlessly.'),
         React.createElement('button', {
           onClick: onSignOut,
           className: 'absolute top-0 right-0 px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400',
@@ -444,7 +464,7 @@ export const Dashboard = ({ onSignOut }) => {
         ),
         React.createElement(ReportsList, { reports: reports, offences: offences })
       ),
-      React.createElement('footer', { className: 'text-center mt-12 text-slate-500' },
+      React.createElement('footer', { className: 'text-center mt-12 text-blue-700' },
         React.createElement('p', null, `© ${new Date().getFullYear()} FRSC OPERATIONS E-DASHBOARD. All rights reserved.`)
       )
     )

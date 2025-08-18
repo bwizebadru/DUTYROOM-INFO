@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 body {
@@ -13,7 +17,6 @@ body.dark-theme {
   background-image: linear-gradient(160deg, #1e293b 0%, #0f172a 100%); /* slate-800 to slate-900 */
   color: #dbeafe; /* blue-100 */
 }
-
 
 /* Custom focus styles for better accessibility and brand alignment */
 *:focus-visible {

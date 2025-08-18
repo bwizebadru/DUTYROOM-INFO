@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 import { TrashIcon } from './icons/TrashIcon.js';
 import { PlusIcon } from './icons/PlusIcon.js';
@@ -13,7 +14,7 @@ const InputField = ({ label, name, value, onChange, type = 'text', placeholder, 
       value: value,
       onChange: onChange,
       placeholder: placeholder,
-      className: `mt-1 block w-full px-3 py-2 bg-white border rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${error ? 'border-red-500' : 'border-slate-300'}`
+      className: `mt-1 block w-full px-3 py-2 bg-white border rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${error ? 'border-red-500' : 'border-slate-300'}`
     }),
     error && React.createElement('p', { className: 'mt-1 text-xs text-red-600' }, error)
   )
@@ -28,7 +29,7 @@ const SelectField = (props) => (
         value: props.value,
         onChange: props.onChange,
         disabled: props.disabled || false,
-        className: `mt-1 block w-full pl-3 pr-10 py-2 text-base border focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md ${props.error ? 'border-red-500' : 'border-slate-300'}`
+        className: `mt-1 block w-full pl-3 pr-10 py-2 text-base border focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md ${props.error ? 'border-red-500' : 'border-slate-300'}`
       }, props.children),
       props.error && React.createElement('p', { className: 'mt-1 text-xs text-red-600' }, props.error)
     )
@@ -91,7 +92,7 @@ export const OffenderInfoForm = ({
           'aria-label': `Remove Offender #${index + 1}`
         }, React.createElement(TrashIcon))
       ),
-      React.createElement('h2', { className: 'text-xl font-semibold text-slate-800 border-b pb-3 mb-6' }, `Offender Information ${isMultiForm ? ` #${index + 1}` : ''}`),
+      React.createElement('h2', { className: 'text-xl font-semibold text-blue-900 border-b pb-3 mb-6' }, `Offender Information ${isMultiForm ? ` #${index + 1}` : ''}`),
       React.createElement('div', { className: 'grid grid-cols-1 gap-6 sm:grid-cols-2' },
         React.createElement(InputField, { label: 'Full Name', name: 'fullName', value: offenderInfo.fullName, onChange: (e) => onChange(index, e), placeholder: 'John Doe', error: getError('fullName') }),
         React.createElement(InputField, { label: 'Ticket Number', name: 'ticket', value: offenderInfo.ticket, onChange: (e) => onChange(index, e), type: 'text', placeholder: '0011D1A09999', error: getError('ticket') }),
@@ -129,7 +130,7 @@ export const OffenderInfoForm = ({
                 type: 'checkbox',
                 checked: offenderInfo.offence.includes(offence.name),
                 onChange: (e) => onOffenceChange(index, offence.name, e.target.checked),
-                className: 'h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'
+                className: 'h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
               }),
               React.createElement('label', { htmlFor: `offence-${index}-${offence.code}`, className: 'ml-3 block text-sm text-slate-900' }, `${offence.code} - ${offence.name}`)
             )
@@ -139,18 +140,18 @@ export const OffenderInfoForm = ({
         React.createElement('div', { className: 'mt-4' },
           React.createElement('p', { className: 'block text-sm font-medium text-slate-700' }, 'Add New Offence'),
           React.createElement('div', { className: 'mt-2 grid grid-cols-1 sm:grid-cols-5 gap-3' },
-            React.createElement('input', { type: 'text', name: 'newOffenceCode', value: newOffence.code, onChange: (e) => setNewOffence(prev => ({ ...prev, code: e.target.value })), onKeyDown: (e) => handleKeyDown(e, handleAddOffenceClick), placeholder: 'Code', className: 'sm:col-span-1 block w-full rounded-md border-slate-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' }),
-            React.createElement('input', { type: 'text', name: 'newOffenceName', value: newOffence.name, onChange: (e) => setNewOffence(prev => ({ ...prev, name: e.target.value })), onKeyDown: (e) => handleKeyDown(e, handleAddOffenceClick), placeholder: 'e.g., Illegal Parking', className: 'sm:col-span-3 block w-full rounded-md border-slate-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' }),
-            React.createElement('button', { onClick: handleAddOffenceClick, type: 'button', className: 'sm:col-span-1 inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' }, 'Add')
+            React.createElement('input', { type: 'text', name: 'newOffenceCode', value: newOffence.code, onChange: (e) => setNewOffence(prev => ({ ...prev, code: e.target.value })), onKeyDown: (e) => handleKeyDown(e, handleAddOffenceClick), placeholder: 'Code', className: 'sm:col-span-1 block w-full rounded-md border-slate-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm' }),
+            React.createElement('input', { type: 'text', name: 'newOffenceName', value: newOffence.name, onChange: (e) => setNewOffence(prev => ({ ...prev, name: e.target.value })), onKeyDown: (e) => handleKeyDown(e, handleAddOffenceClick), placeholder: 'e.g., Illegal Parking', className: 'sm:col-span-3 block w-full rounded-md border-slate-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm' }),
+            React.createElement('button', { onClick: handleAddOffenceClick, type: 'button', className: 'sm:col-span-1 inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' }, 'Add')
           )
         )
       ),
       isAcsSelected && (
-        React.createElement('div', { className: 'border-t border-slate-200 mt-6 pt-6 bg-amber-50 p-4 rounded-md' },
-          React.createElement('h3', { className: 'text-md font-semibold text-slate-800 mb-4' }, 'Currency Offered Details (ACS)'),
+        React.createElement('div', { className: 'border-t border-slate-200 mt-6 pt-6 bg-blue-50 p-4 rounded-md' },
+          React.createElement('h3', { className: 'text-md font-semibold text-blue-900 mb-4' }, 'Currency Offered Details (ACS)'),
           React.createElement('div', { className: 'space-y-4' },
             offenderInfo.currencyDetails.map((detail, currencyIndex) => (
-              React.createElement('div', { key: detail.id, className: 'p-3 border border-amber-200 rounded-lg bg-white relative' },
+              React.createElement('div', { key: detail.id, className: 'p-3 border border-blue-200 rounded-lg bg-white relative' },
                 offenderInfo.currencyDetails.length > 1 && (
                   React.createElement('button', { onClick: () => onRemoveCurrencyDetail(index, detail.id), className: 'absolute top-2 right-2 p-1 text-slate-400 hover:text-red-600', 'aria-label': 'Remove currency entry' }, React.createElement(TrashIcon))
                 ),
@@ -180,10 +181,10 @@ export const OffenderInfoForm = ({
               )
             )),
             React.createElement('div', { className: 'flex items-center justify-between' },
-              React.createElement('button', { onClick: () => onAddCurrencyDetail(index), type: 'button', className: 'flex items-center px-4 py-2 text-sm bg-indigo-100 text-indigo-700 font-semibold rounded-lg shadow-sm hover:bg-indigo-200' }, React.createElement(PlusIcon), React.createElement('span', { className: 'ml-2' }, 'Add Currency Entry')),
+              React.createElement('button', { onClick: () => onAddCurrencyDetail(index), type: 'button', className: 'flex items-center px-4 py-2 text-sm bg-blue-100 text-blue-700 font-semibold rounded-lg shadow-sm hover:bg-blue-200' }, React.createElement(PlusIcon), React.createElement('span', { className: 'ml-2' }, 'Add Currency Entry')),
               React.createElement('div', { className: 'flex items-center space-x-2' },
-                React.createElement('input', { type: 'text', value: newCurrency, onChange: e => setNewCurrency(e.target.value), onKeyDown: (e) => handleKeyDown(e, handleAddCurrencyClick), placeholder: 'New type (e.g. CAD)', className: 'block w-full rounded-md border-slate-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' }),
-                React.createElement('button', { onClick: handleAddCurrencyClick, type: 'button', className: 'px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700' }, 'Add')
+                React.createElement('input', { type: 'text', value: newCurrency, onChange: e => setNewCurrency(e.target.value), onKeyDown: (e) => handleKeyDown(e, handleAddCurrencyClick), placeholder: 'New type (e.g. CAD)', className: 'block w-full rounded-md border-slate-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm' }),
+                React.createElement('button', { onClick: handleAddCurrencyClick, type: 'button', className: 'px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700' }, 'Add')
               )
             )
           )

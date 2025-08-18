@@ -1,4 +1,5 @@
 
+
 import React, { useState, useMemo } from 'react';
 
 const actionTakenMap = {
@@ -69,7 +70,7 @@ export const ReportsList = ({ reports, offences }) => {
   return (
     React.createElement('div', { className: 'mt-12' },
       React.createElement('div', { className: 'flex justify-between items-center mb-6' },
-        React.createElement('h2', { className: 'text-2xl font-bold text-slate-800' }, 'Submitted Reports'),
+        React.createElement('h2', { className: 'text-2xl font-bold text-blue-900' }, 'Submitted Reports'),
         React.createElement('div', { className: 'flex items-center space-x-2' },
             React.createElement('label', { htmlFor: 'start-date', className: 'text-sm font-medium text-slate-700' }, 'From:'),
             React.createElement('input', { 
@@ -77,7 +78,7 @@ export const ReportsList = ({ reports, offences }) => {
               id: 'start-date',
               value: startDate,
               onChange: e => setStartDate(e.target.value),
-              className: 'block w-full text-sm rounded-md border-slate-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500'
+              className: 'block w-full text-sm rounded-md border-slate-300 shadow-sm focus:ring-blue-500 focus:border-blue-500'
             }),
             React.createElement('label', { htmlFor: 'end-date', className: 'text-sm font-medium text-slate-700' }, 'To:'),
             React.createElement('input', {
@@ -85,7 +86,7 @@ export const ReportsList = ({ reports, offences }) => {
               id: 'end-date',
               value: endDate,
               onChange: e => setEndDate(e.target.value),
-              className: 'block w-full text-sm rounded-md border-slate-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500'
+              className: 'block w-full text-sm rounded-md border-slate-300 shadow-sm focus:ring-blue-500 focus:border-blue-500'
             })
         )
       ),
