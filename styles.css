@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8fafc; /* bg-slate-50 */
+  background-image: linear-gradient(160deg, #f8fafc 0%, #eef2f7 100%);
+  color: #334155; /* slate-700 */
+}
+
+/* Custom focus styles for better accessibility and brand alignment */
+*:focus-visible {
+  outline: 2px solid #4f46e5 !important; /* focus:ring-indigo-500 */
+  outline-offset: 2px !important;
+  border-radius: 6px;
+}
+
+/* Subtle transitions for interactive elements */
+button, a, input[type="checkbox"] {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Enhancing card styles */
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.shadow-md:hover {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -2px rgb(0 0 0 / 0.06);
+}
+
+/* Specific component tweaks */
+.dashboard-header {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e2e8f0; /* slate-200 */
+  margin-bottom: 2.5rem;
+}
+
+/* Reports table improvements */
+.reports-table thead th {
+    background-color: #f1f5f9; /* slate-100 */
+}
+
+.reports-table tbody tr:hover {
+    background-color: #f8fafc; /* slate-50 */
+}
+
+/* Custom scrollbar for better aesthetics in scrollable areas */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* slate-300 */
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* slate-400 */
+  background-clip: content-box;
+}

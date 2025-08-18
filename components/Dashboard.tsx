@@ -393,7 +393,7 @@ export const Dashboard = ({ onSignOut }) => {
 
   return (
     React.createElement('div', { className: 'container mx-auto p-4 sm:p-6 lg:p-8' },
-      React.createElement('header', { className: 'text-center mb-10 flex flex-col items-center relative' },
+      React.createElement('header', { className: 'text-center flex flex-col items-center relative dashboard-header' },
         React.createElement('h1', { className: 'text-4xl sm:text-5xl font-bold text-slate-800 tracking-tight' }, 'FRSC OPERATIONS E-DASHBOARD'),
         React.createElement('p', { className: 'mt-2 text-lg text-slate-600' }, 'Fill in the details below and export your data effortlessly.'),
         React.createElement('button', {
